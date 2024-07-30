@@ -5,12 +5,13 @@ import FormField from '../../components/FormField'
 import { useForm } from "react-hook-form";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Feather } from "@expo/vector-icons";
-import {  useNavigation, } from "expo-router";
+import {  Link, useNavigation, } from "expo-router";
 import  CustomButton from '../../components/CustomButton'
 import { useRouter } from "expo-router";
 export default function Login() {
   const router = useRouter()
    const navigation = useNavigation()
+     const EmailRegx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   useEffect(()=>{
     navigation.setOptions({
@@ -46,7 +47,10 @@ export default function Login() {
               placeholder={"Enter your E-mail "}
               name={"gmail"}
               errors={errors}
-              rules={{ required: "Email  is required" }}
+              rules={{
+                required: "Email is required",
+                pattern: { value: EmailRegx, message: "Invalide E-mail " },
+              }}
               iconname={"mail"}
               iconsize={24}
               otherstyles={"my-4"}
@@ -61,12 +65,7 @@ export default function Login() {
                   value: 3,
                   message: "Password must be at least 8 characters",
                 },
-                // pattern: {
-                //   value:
-                //     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-                //   message:
-                //     "Password must include uppercase, lowercase, number, and special character",
-                // },
+        
               }}
               placeholder={"Enter your password"}
               name={"Password"}
@@ -78,15 +77,9 @@ export default function Login() {
             />
             <View className=" flex justify-between flex-row ">
               <Text></Text>
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.push("./");
-                }}
-              >
-                <Text className="text-primary   font-intersb text-sm p-2  ">
+              <Link href={'/Forgetpassword'} className="text-primary   font-intersb text-sm p-2  ">
                   Forget password ?
-                </Text>
-              </TouchableOpacity>
+                </Link>
             </View>
             <CustomButton
               title={"Log in "}
@@ -99,16 +92,10 @@ export default function Login() {
               <Text className="text-center  text-darkgraycolor">
                 Don't have an Account ?{" "}
               </Text>
-              <TouchableOpacity
-                onPress={() => {
-                  router.push("./SignUp");
-                }}
-                className=""
-              >
-                <Text className="text-primary font-intersb   text-center">
+         
+                <Link href={'./SignUp'} className="text-primary font-intersb   text-center">
                   Sign in
-                </Text>
-              </TouchableOpacity>
+                </Link>
             </View>
           </View>
         </ScrollView>

@@ -7,6 +7,7 @@ import { Icons } from "../constants/Icons";
 export default function FormField({
   IconUrl,
   placeholder,
+  keyboardType,
   title,
   name,
   errors,
@@ -21,9 +22,9 @@ export default function FormField({
 }) {
   const [showpassword, setShowpassword] = useState(false);
   return (
-    <View className={`space-y ${otherstyles}`}>
+    <View className={`space-y ${otherstyles} `}>
       {title && (
-        <Text className={`text-base text-gray-100 font-medium`}>{title}</Text>
+        <Text className={`font-intersb  ml-2 my-1`}>{title} :</Text>
       )}
       <View
         className={`w-full b h-16 px-4  bg-lightgraycolor   rounded-2xl focus:border-primary flex-row items-center`}
@@ -42,7 +43,8 @@ export default function FormField({
                 />
               )}
 
-              <TextInput
+              <TextInput 
+              keyboardType={keyboardType || undefined}
                 className={"flex-1 ml-2   font-intermd font-medium text-md"}
                 placeholder={placeholder}
                 onBlur={onBlur}
